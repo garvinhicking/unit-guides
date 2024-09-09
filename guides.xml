@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<guides
+    xmlns="https://www.phpdoc.org/guides"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.phpdoc.org/guides vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+    links-are-relative="true"
+    theme="typo3docs"
+>
+    <extension class="\phpDocumentor\Guides\RestructuredText\DependencyInjection\ReStructuredTextExtension"/>
+    <extension class="\phpDocumentor\Guides\Bootstrap\DependencyInjection\BootstrapExtension"/>
+    <extension class="\phpDocumentor\Guides\Graphs\DependencyInjection\GraphsExtension"/>
+    <extension class="\phpDocumentor\Guides\Markdown\DependencyInjection\MarkdownExtension"/>
+    <extension class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"/>
+    <extension class="\T3Docs\GuidesExtension\DependencyInjection\Typo3GuidesExtension"/>
+    <extension class="\T3Docs\GuidesPhpDomain\DependencyInjection\GuidesPhpDomainExtension"/>
+    <extension class="\T3Docs\ConsoleCommand\DependencyInjection\ConsoleCommandExtension"/>
+    <output-format>html</output-format>
+    <output-format>singlepage</output-format>
+    <output-format>interlink</output-format>
+</guides>

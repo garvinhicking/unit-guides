@@ -1,0 +1,32 @@
+.sidebar {
+    margin: 0;
+    margin-bottom: $spacer;
+    padding: $spacer;
+    border-radius: $border-radius;
+    overflow: hidden;
+    background: $white;
+    font-size: $font-size-sm;
+    border: 1px solid $dark;
+    @include media-breakpoint-up(sm) {
+        float: right;
+        width: 18rem;
+        margin-left: $spacer;
+    }
+    > .sidebar-title {
+        font-weight: $font-weight-bold;
+        color: $white;
+        background-color: $dark;
+        padding: calc(#{$spacer} / 2) $spacer;
+        margin: -$spacer;
+        margin-bottom: $spacer;
+    }
+    img,
+    p,
+    ul,
+    dl {
+        margin-bottom: .5em;
+    }
+    > *:last-child {
+        margin-bottom: 0;
+    }
+}

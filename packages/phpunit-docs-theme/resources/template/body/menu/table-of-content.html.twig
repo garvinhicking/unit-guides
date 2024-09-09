@@ -1,0 +1,8 @@
+<div class="toctree-wrapper compound">
+    {% if node.caption %}
+        <p class="topic-title">{{ renderNode(node.caption) }}</p>
+    {% elseif node.options['caption'] %}
+        <p class="topic-title">{{ node.options['caption'] }}</p>
+    {% endif %}
+    {% include "body/menu/menu-level.html.twig" %}
+</div>

@@ -1,0 +1,9 @@
+<div class="sitemap">
+    <ul>
+        {% for entry in node.menuEntries -%}
+            {% include "body/menu/sitemap-level.html.twig" with {
+                menuEntry:entry
+            } %}
+        {% endfor %}
+    </ul>
+</div>

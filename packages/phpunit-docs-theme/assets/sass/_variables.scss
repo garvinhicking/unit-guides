@@ -1,0 +1,164 @@
+//
+// Colors
+// -------------------------------------------------
+$white:             #ffffff;
+$gray-100:          shade-color($white, 3%);
+$gray-200:          shade-color($white, 5%);
+$gray-300:          shade-color($white, 10%);
+$gray-400:          shade-color($white, 20%);
+$gray-500:          shade-color($white, 30%);
+$gray-600:          shade-color($white, 40%);
+$gray-700:          shade-color($white, 50%);
+$gray-800:          shade-color($white, 65%);
+$gray-900:          shade-color($white, 80%);
+$black:             #000000;
+
+$blue:              #268bd9;
+$indigo:            #5d4db3;
+$purple:            #7f4db3;
+$pink:              #bf4080;
+$red:               #cc3d33;
+$orange:            #ff8700;
+$yellow:            #ffd500;
+$green:             #6eb34d;
+$teal:              #33cc9e;
+$cyan:              #13abec;
+
+$primary:           #ff8700;
+$primary-dark:      shade-color($primary, 20%);
+$primary-light:     tint-color($primary, 20%);
+
+$secondary:         #333333;
+$secondary-dark:    shade-color($secondary, 20%);
+$secondary-light:   tint-color($secondary, 20%);
+
+$tertiary:          #005E85;
+$tertiary-dark:     shade-color($tertiary, 20%);
+$tertiary-light:    lighten($tertiary, 20%);
+
+$quaternary:        #75a75a;
+$quaternary-dark:   shade-color($quaternary, 20%);
+$quaternary-light:  tint-color($quaternary, 20%);
+
+$success:           #5cb85c;
+$info:              #319fc0;
+$warning:           #f0ad4e;
+$danger:            #d9534f;
+
+$light:             $gray-200;
+$lighter:           $gray-100;
+$dark:              $gray-800;
+$darker:            $gray-900;
+
+$theme-colors: (
+    primary: $primary,
+    secondary: $secondary,
+    tertiary: $tertiary,
+    quaternary: $quaternary,
+    success: $success,
+    info: $info,
+    warning: $warning,
+    danger: $danger,
+    notice: #efefef,
+    default: $white,
+    light: $light,
+    lighter: $lighter,
+    dark: $dark,
+    darker: $darker
+);
+
+$link-color:                   $gray-900;
+$link-hover-color:             $black;
+$link-alternate-color:         #ffffff;
+$link-alternate-hover-color:   darken($link-alternate-color, 15%);
+
+$yiq-contrasted-threshold: 160;
+
+$btn-primary-color: #fff;
+
+//
+// directive .. confval::
+//
+
+$confval-bg: hsl(0, 0%, 96%);
+$confval-dt-bg: hsl(0, 0%, 90%);
+$confval-dt-border: #666666;
+
+//
+// Code Colors
+// --------------------------------------------------
+$code-color:        hsl(350, 100%, 40%);
+//
+$code-color-bash:   hsl(0, 100%, 0%);
+$code-color-css:    hsl(275, 100%, 40%);
+$code-color-file:   hsl(328, 100%, 50%);
+$code-color-html:   hsl(275, 100%, 40%);
+$code-color-js:     hsl(128, 100%, 20%);
+$code-color-method: hsl(210, 100%, 35%);
+$code-color-php:    hsl(210, 100%, 30%);
+$code-color-py:     hsl(210, 100%, 50%);
+$code-color-rst:    hsl(175, 100%, 15%);
+$code-color-shell:  hsl(0, 100%, 0%);
+$code-color-sql:    hsl(175, 100%, 15%);
+$code-color-typoscript: hsl(12, 100%, 20%);
+$code-color-xml:    hsl(275, 100%, 40%);
+$code-color-yaml:   hsl(170, 80%, 25%);
+
+//
+// Fonts
+// --------------------------------------------------
+$font-family-sans-serif: 'Source Sans 3', sans-serif;
+$font-family-monospace: 'Source Code Pro', monospace;
+$font-weight-bold: 600;
+
+$h1-font-size: 2em;
+$h2-font-size: 1.75em;
+$h3-font-size: 1.5em;
+$h4-font-size: 1.25em;
+$h5-font-size: 1em;
+$h6-font-size: .85em;
+
+$headings-font-weight: $font-weight-bold;
+$headings-margin-bottom: .5em;
+
+//
+// Components
+// --------------------------------------------------
+$box-shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, .2);
+
+//
+// Cards
+// --------------------------------------------------
+$card-spacer-y: 1.25rem;
+$card-spacer-x: 1.25rem;
+
+//
+// Table
+// --------------------------------------------------
+$table-bg:          $white;
+
+//
+// Grid
+// --------------------------------------------------
+$grid-gutter-width: 40px;
+
+
+//
+// Admonitions
+// --------------------------------------------------
+
+$admonition-border-color-default: #666;
+$admonition-border-color-highlighted: $primary;
+
+$admonition-icons:
+    attention $admonition-border-color-highlighted #{$fa-var-bell},
+    caution $admonition-border-color-highlighted #{$fa-var-exclamation-triangle},
+    danger $admonition-border-color-highlighted #{$fa-var-exclamation-triangle},
+    error $admonition-border-color-highlighted #{$fa-var-times-circle},
+    important "" #{$fa-var-bell},
+    hint "" #{$fa-var-lightbulb},
+    note "" #{$fa-var-info-circle},
+    seealso "" #{$fa-var-share},
+    tip "" #{$fa-var-lightbulb},
+    warning $admonition-border-color-highlighted #{$fa-var-exclamation-triangle},
+;

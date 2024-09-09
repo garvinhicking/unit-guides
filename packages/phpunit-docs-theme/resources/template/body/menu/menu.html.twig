@@ -1,0 +1,14 @@
+
+{% if node.options.menu == 'mainmenu' %}
+    {% include "structure/navigation/menu.html.twig" %}
+{% elseif node.options.menu == 'sitemap' %}
+    {% include "body/menu/sitemap.html.twig" %}
+{% else %}
+    <div class="toctree-wrapper compound">
+        <ul>
+            {% for entry in node.entries -%}
+                {{ renderNode(entry) }}
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

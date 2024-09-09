@@ -1,0 +1,39 @@
+
+<footer class="page-footer">
+    <div class="frame frame-ruler-before frame-background-dark">
+        <div class="frame-container">
+            <div class="frame-inner">
+                {% if env.projectNode.variables.project_home or env.projectNode.variables.project_contact or env.projectNode.variables.project_issues or env.projectNode.variables.project_repository -%}
+                    <ul class="footer-simplemenu">
+                        {% if env.projectNode.variables.project_home -%}
+                            <li><a href="{{ renderNode(env.projectNode.variables.project_home) }}" title="Home" rel="nofollow noopener"><span>Home</span></a></li>
+                        {% endif %}
+                        {% if env.projectNode.variables.project_contact -%}
+                            <li><a href="{{ renderNode(env.projectNode.variables.project_contact) }}" title="Contact" rel="nofollow noopener"><span>Contact</span></a></li>
+                        {% endif %}
+                        {% if env.projectNode.variables.project_issues -%}
+                            <li><a href="{{ renderNode(env.projectNode.variables.project_issues) }}" rel="nofollow noopener" title="Issues"><span>Issues</span></a></li>
+                        {% endif %}
+                        {% if env.projectNode.variables.project_repository -%}
+                            <li><a href="{{ renderNode(env.projectNode.variables.project_repository) }}" rel="nofollow noopener" title="Repository"><span>Repository</span></a></li>
+                        {% endif %}
+                    </ul>
+                {%- endif %}
+                <div class="footer-additional">
+                    <p class="text-center">Last rendered: {{ env.projectNode.lastRendered|date("M d, Y H:i") }}</p>
+                </div>
+                <div class="footer-meta">
+                    {% if env.projectNode.copyright %}
+                    <div class="footer-meta-copyright">
+                        &copy; {{ env.projectNode.copyright }}
+                    </div>
+                    {% endif -%}
+                    <ul class="footer-meta-navigation">
+                        <li><a href="https://typo3.org/legal-notice" rel="nofollow" target="_blank" title="Legal Notice">Legal Notice</a></li>
+                        <li><a href="https://typo3.org/privacy-policy" rel="nofollow" target="_blank" title="Privacy Policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>

@@ -1,0 +1,58 @@
+{
+    "name": "garvinhicking/unit-guides",
+    "description": "phpDocumentor-based Documentation rendering for PHPUnit.",
+    "license": "OPL-1.0",
+    "require": {
+        "php": "^8.1",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "brotkrueml/twig-codehighlight": "^0.1.1",
+        "phpdocumentor/guides-cli": "^1.0",
+        "phpdocumentor/guides-graphs": "^1.0",
+        "phpdocumentor/guides-markdown": "^1.0",
+        "phpdocumentor/guides-theme-bootstrap": "^1.0",
+        "symfony/clock": "^6.4",
+        "symfony/finder": "^6.4",
+        "symfony/http-client": "^6.4",
+        "symfony/yaml": "^6.4",
+        "t3docs/console-command": "^0.1.4",
+        "t3docs/guides-php-domain": "^1.0",
+        "t3docs/typo3-guides-cli": "*",
+        "t3docs/typo3-guides-extension": "*",
+        "t3docs/typo3-version-handling": "*"
+    },
+    "require-dev": {
+        "ergebnis/composer-normalize": "^2.43",
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "phpstan/extension-installer": "^1.4",
+        "phpstan/phpstan": "^1.12",
+        "phpstan/phpstan-strict-rules": "^1.6",
+        "phpunit/phpunit": "^10.5",
+        "symfony/console": "^6.4",
+        "symplify/monorepo-builder": "^11.2",
+        "symplify/phpstan-rules": "^13.0"
+    },
+    "replace": {
+        "symfony/polyfill-php80": "*",
+        "symfony/polyfill-php81": "*",
+        "garvinhicking/phpunit-docs-theme": "self.version"
+    },
+    "autoload": {
+        "psr-4": {
+            "T3Docs\\Typo3DocsTheme\\": "packages/phpunit-docs-theme/src/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true,
+            "phpstan/extension-installer": true
+        },
+        "platform": {
+            "php": "8.1.27"
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "make": "make ENV=local $COMPOSER_SCRIPT_ARGS"
+    }
+}

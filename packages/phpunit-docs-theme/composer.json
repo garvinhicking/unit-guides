@@ -1,0 +1,19 @@
+{
+    "name": "garvininhicking/unit-guides-theme",
+    "description": "A theme for use in the phpdocumentor",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://phpunit.de",
+    "autoload": {
+        "psr-4": {
+            "PHPUnit\\PHPUnitTheme\\": "src/"
+        }
+    },
+    "require": {
+        "ext-curl": "*",
+        "brotkrueml/twig-codehighlight": "^0.1.1",
+        "phpdocumentor/guides-graphs": "^1.0",
+        "phpdocumentor/guides-theme-bootstrap": "^1.0",
+        "t3docs/typo3-version-handling": "*"
+    }
+}

@@ -1,0 +1,21 @@
+.table {
+    td {
+        word-break: break-word;
+    }
+    th :last-child,
+    td :last-child {
+        margin-bottom: 0;
+    }
+    > caption {
+        @extend .figure-caption;
+        @extend .pb-2;
+        padding-top: 0;
+    }
+}
+
+.table-responsive {
+    table.table {
+        margin-bottom: 0;
+    }
+    margin-bottom: $spacer;
+}

@@ -1,0 +1,9 @@
+/output/
+/vendor/
+/fixtures-local/
+/.cache/
+/.Build/
+/**/temp/
+/Documentation-GENERATED-*
+/.phpdoc/
+/phpdoc.dist.xml

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<guides
+    xmlns="https://www.phpdoc.org/guides"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://www.phpdoc.org/guides vendor/phpdocumentor/guides-cli/resources/schema/guides.xsd"
+>
+    <project
+        title="PHPUnit Documentation"
+        version="main"
+        release="main"
+        copyright="(copyright-todo)"
+    />
+    <extension
+        class="\T3Docs\Typo3DocsTheme\DependencyInjection\Typo3DocsThemeExtension"
+        edit-on-github="sebastianbergmann/phpunit"
+        edit-on-github-branch="main"
+        interlink-shortcode="phpunit"
+        project-contact="https://phpunit.de"
+        project-home="https://phpunit.de"
+        project-issues="https://github.com/sebastianbergmann/phpunit/issues"
+        project-repository="https://github.com/sebastianbergmann/phpunit/"
+    />
+</guides>

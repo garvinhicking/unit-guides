@@ -1,0 +1,86 @@
+{% extends "structure/layout.html.twig" %}
+
+{% block head %}
+    {%- for headerNode in node.headerNodes -%}
+        {{ renderNode(headerNode) }}
+    {%- endfor -%}
+    {{ parent() }}
+{% endblock %}
+
+{% block menu_doc %}
+    <div aria-label="Main navigation" class="main_menu" role="navigation">
+        {{ renderMenu('mainmenu') }}
+    </div>
+    {% include "structure/navigation/meta-menu.html.twig" %}
+{% endblock %}
+
+{% block body %}
+
+<article class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+    <div itemprop="articleBody">
+        <!-- content start -->
+        {% if env.currentFileName == 'Sitemap' %}
+            {% include "pagetemplates/sitemap.html.twig" %}
+        {% else %}
+        {% for child in node.children -%}
+            {{ renderNode(child) }}
+        {%~ endfor -%}
+        {% endif %}
+        <!-- content end -->
+    </div>
+</article>
+{% endblock %}
+
+{% block breadcrumb %}
+    <nav aria-label="breadcrumbs navigation" class="breadcrumb-bar" role="navigation">
+        {{ renderBreadcrumb() }}
+        {% include "structure/layoutParts/editOnGithubButtons.html.twig" %}
+    </nav>
+{% endblock %}
+
+{% block content %}
+    {{ renderNode(node) }}
+{% endblock %}
+
+{% block footer %}
+    {% if parts.footer %}
+        {% for child in parts.footer -%}
+            {{ renderNode(child) }}
+        {%~ endfor -%}
+    {% endif %}
+{% endblock %}
+
+{% block headerLinks %}
+    {% for link in getPagerLinks() %}
+        <link href="{{ link.url }}" rel="{{ link.relation }}" title="{{ link.title }}"/>
+    {% endfor -%}
+{% endblock %}
+
+
+{% block pager %}
+    {% set pagerLinks = getPrevNextLinks() %}
+
+    {% if pagerLinks|length > 0 %}
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                {%- for link in pagerLinks -%}
+                    {%- if link.relation=='prev' -%}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ link.url }}"
+                               title="Accesskey Alt(+Shift)+p">
+                                Previous
+                            </a>
+                        </li>
+                    {% elseif link.relation=='next' -%}
+                        <li class="page-item">
+                            <a class="page-link" href="{{ link.url }}"
+                               title="Accesskey Alt(+Shift)+n">
+                                Next
+                            </a>
+                        </li>
+                    {% endif -%}
+                {%- endfor -%}
+            </ul>
+        </nav>
+    {% endif %}
+{% endblock %}
