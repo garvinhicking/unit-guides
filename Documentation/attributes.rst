@@ -35,6 +35,7 @@ namespace. They are documented in this appendix.
 As an alternative to prefixing your test method names with ``test``,
 you can use the ``Test`` attribute to mark it as a test method.
 
+.. _appendixes.attributes.test.examples.ExampleTest.php:
 .. code-block:: php
     :caption: Using the ``Test`` attribute
     :name: appendixes.attributes.test.examples.ExampleTest.php
@@ -67,6 +68,7 @@ you can use the ``Test`` attribute to mark it as a test method.
 The ``TestDox(string $text)`` attribute can be used to customize the text that is printed for
 a test when TestDox output is enabled.
 
+.. _appendixes.attributes.testdox.examples.ExampleTest.php:
 .. code-block:: php
     :caption: Using the ``TestDox`` attribute
     :name: appendixes.attributes.testdox.examples.ExampleTest.php
@@ -104,6 +106,7 @@ When you use the ``TestDox`` attribute for a test method that uses a
 :ref:`data provider <writing-tests-for-phpunit.data-providers>` then you
 may use the method parameters as placeholders in your alternative description.
 
+.. _appendixes.attributes.testdox.examples.ExampleTest2.php:
 .. code-block:: php
     :caption: Using the ``TestDox`` attribute together with data providers
     :name: appendixes.attributes.testdox.examples.ExampleTest2.php
@@ -424,6 +427,7 @@ The ``TestWith(array $data)`` attribute can be used to define a
 :ref:`data provider <writing-tests-for-phpunit.data-providers>` for a
 test method without having to implement a static data provider method.
 
+.. _appendixes.attributes.testwith.examples.ExampleTest.php:
 .. code-block:: php
     :caption: Using the ``TestWith`` attribute
     :name: appendixes.attributes.testwith.examples.ExampleTest.php
@@ -483,6 +487,7 @@ The ``TestWithJson(string $json)`` attribute can be used to define a
 :ref:`data provider <writing-tests-for-phpunit.data-providers>` for a
 test method without having to implement a static data provider method.
 
+.. _appendixes.attributes.testwithjson.examples.ExampleTest.php:
 .. code-block:: php
     :caption: Using the ``TestWithJson`` attribute
     :name: appendixes.attributes.testwithjson.examples.ExampleTest.php

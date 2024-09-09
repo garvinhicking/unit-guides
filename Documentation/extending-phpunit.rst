@@ -220,6 +220,7 @@ for each event to a stream. In the example shown below, we use ``--no-output`` t
 default progress output as well as the default result output. Then we use ``--log-events-text php://stdout``
 to write event information to standard output:
 
+.. _extending-phpunit.event-system.event-system.debugging-phpunit.examples.logging-events:
 .. code-block::
     :caption: Output of "phpunit --no-output --log-events-text php://stdout" command
     :name: extending-phpunit.event-system.event-system.debugging-phpunit.examples.logging-events
@@ -253,6 +254,7 @@ Alternatively, the ``--log-events-verbose-text`` CLI option can be used to inclu
 about resource consumption (time since the test runner was started, time since the previous event,
 and memory usage):
 
+.. _extending-phpunit.event-system.event-system.debugging-phpunit.examples.logging-events-verbose:
 .. code-block::
     :caption: Output of "phpunit --no-output --log-events-verbose-text php://stdout" command
     :name: extending-phpunit.event-system.event-system.debugging-phpunit.examples.logging-events-verbose

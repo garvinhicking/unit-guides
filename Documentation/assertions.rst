@@ -1633,6 +1633,7 @@ Running the test shown above yields the output shown below:
 :numref:`appendixes.assertions.assertThat.tables.constraints` shows the
 available ``PHPUnit\Framework\Constraint`` classes.
 
+.. _appendixes.assertions.assertThat.tables.constraints:
 .. rst-class:: table
 .. list-table:: Constraints
     :name: appendixes.assertions.assertThat.tables.constraints

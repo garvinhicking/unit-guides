@@ -370,6 +370,7 @@ Please note that this annotation requires a fully-qualified class name (FQCN).
 To make this more obvious to the reader, it is recommended to use a leading
 backslash (even if this not required for the annotation to work correctly).
 
+.. _appendixes.annotations.examples.CoversDefaultClassTest.php:
 .. code-block:: php
     :caption: Using @coversDefaultClass to shorten annotations
     :name: appendixes.annotations.examples.CoversDefaultClassTest.php
@@ -551,6 +552,7 @@ PHPUnit from preserving global state with the
 The ``@requires`` annotation can be used to skip tests when common
 preconditions, like the PHP Version or installed extensions, are not met.
 
+.. _writing-tests-for-phpunit.skipping-tests.skipping-tests-using-requires.tables.api:
 .. rst-class:: table
 .. list-table:: Possible @requires usages
     :name: writing-tests-for-phpunit.skipping-tests.skipping-tests-using-requires.tables.api

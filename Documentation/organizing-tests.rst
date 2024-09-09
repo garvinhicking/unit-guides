@@ -150,6 +150,7 @@ shows a minimal :file:`phpunit.xml` file that will add all
 :file:`*Test.php` files when the :file:`tests`
 directory is recursively traversed.
 
+.. _organizing-tests.xml-configuration.examples.phpunit.xml:
 .. code-block:: xml
     :caption: Composing a Test Suite Using XML Configuration
     :name: organizing-tests.xml-configuration.examples.phpunit.xml

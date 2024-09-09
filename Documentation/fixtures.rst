@@ -27,6 +27,7 @@ fixture. Once the test method has finished running, whether it succeeded or fail
 another template method named ``tearDown()`` is invoked: this is where you can clean
 up the objects against which you tested.
 
+.. _fixtures.examples.ExampleTest.php:
 .. code-block:: php
     :caption: Example of a test class that uses setUp() and tearDown()
     :name: fixtures.examples.ExampleTest.php
@@ -70,6 +71,7 @@ above the ``$this->example`` property.
 
 Another problem can occur when inheritance comes into play:
 
+.. _fixtures.examples.MyTestCase.php:
 .. code-block:: php
     :caption: Example of an abstract test case class with a setUp() method
     :name: fixtures.examples.MyTestCase.php
@@ -85,6 +87,7 @@ Another problem can occur when inheritance comes into play:
         }
     }
 
+.. _fixtures.examples.ExampleTest2.php:
 .. code-block:: php
     :caption: Example of a concrete test case class that extends an abstract test case class with a setUp() method
     :name: fixtures.examples.ExampleTest2.php
@@ -158,6 +161,7 @@ uses the ``setUpBeforeClass()`` and
 database before the test case class' first test and to disconnect from the
 database after the last test of the test case, respectively.
 
+.. _fixtures.sharing-fixture.examples.DatabaseTest.php:
 .. code-block:: php
     :caption: Sharing fixture between the tests of a test suite
     :name: fixtures.sharing-fixture.examples.DatabaseTest.php

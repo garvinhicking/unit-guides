@@ -134,6 +134,7 @@ the listed units of code when the test methods of this test case class are execu
 :numref:`code-coverage.targeting-units-of-code.examples.InvoiceTest.php`
 shows an example.
 
+.. _code-coverage.targeting-units-of-code.examples.InvoiceTest.php:
 .. code-block:: php
     :caption: Test class that specifies which class it wants to cover
     :name: code-coverage.targeting-units-of-code.examples.InvoiceTest.php
@@ -177,6 +178,7 @@ The ``PHPUnit\Framework\Attributes\CoversNothing`` attribute can be used to spec
 should not contribute to code coverage at all. This can be helpful when writing integration tests
 and to make sure you only generate code coverage with smaller tests.
 
+.. _code-coverage.targeting-units-of-code.examples.GuestbookIntegrationTest.php:
 .. code-block:: php
     :caption: A test that specifies that it does not want to contribute to code coverage
     :name: code-coverage.targeting-units-of-code.examples.GuestbookIntegrationTest.php
@@ -204,6 +206,7 @@ and that you may want to ignore during code coverage analysis. PHPUnit lets you 
 using the ``@codeCoverageIgnore``, ``@codeCoverageIgnoreStart``, and ``@codeCoverageIgnoreEnd``
 annotations that can be used in production code:
 
+.. _code-coverage.ignoring-code-blocks.examples.example.php:
 .. code-block:: php
     :caption: Using the ``@codeCoverageIgnore``, ``@codeCoverageIgnoreStart``, and ``@codeCoverageIgnoreEnd`` annotations
     :name: code-coverage.ignoring-code-blocks.examples.example.php

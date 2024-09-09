@@ -141,6 +141,7 @@ Here is a first example of how to use the ``createStub(string $type)`` method to
 create a test stub for ``Dependency`` so that we can test ``SomeClass`` without
 using a real implementation of ``Dependency``:
 
+.. _test-doubles.test-stubs.examples.SomeClassTest.php:
 .. literalinclude:: examples/test-doubles/SomeClassTest.php
    :caption: Stubbing a method call to return a fixed value
    :name: test-doubles.test-stubs.examples.SomeClassTest.php
