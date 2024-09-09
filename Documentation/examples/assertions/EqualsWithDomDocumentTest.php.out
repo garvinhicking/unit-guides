@@ -1,0 +1,28 @@
+./tools/phpunit tests/EqualsWithDomDocumentTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 failure:
+
+1) EqualsWithDomDocumentTest::testFailure
+Failed asserting that two DOM documents are equal.
+--- Expected
++++ Actual
+@@ @@
+ <?xml version="1.0"?>
+-<foo>
+-  <bar/>
+-</foo>
++<bar>
++  <foo/>
++</bar>
+
+/path/to/tests/EqualsWithDomDocumentTest.php:14
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.

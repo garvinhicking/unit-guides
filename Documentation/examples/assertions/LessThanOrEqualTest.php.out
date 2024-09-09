@@ -1,0 +1,18 @@
+./tools/phpunit tests/LessThanOrEqualTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 failure:
+
+1) LessThanOrEqualTest::testFailure
+Failed asserting that 2 is equal to 1 or is less than 1.
+
+/path/to/tests/LessThanOrEqualTest.php:8
+
+FAILURES!
+Tests: 1, Assertions: 2, Failures: 1.

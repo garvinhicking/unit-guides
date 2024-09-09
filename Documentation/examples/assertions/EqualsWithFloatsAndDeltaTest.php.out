@@ -1,0 +1,18 @@
+./tools/phpunit tests/EqualsWithFloatsAndDeltaTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 failure:
+
+1) EqualsWithFloatsAndDeltaTest::testFailure
+Failed asserting that 1.5 matches expected 1.0.
+
+/path/to/tests/EqualsWithFloatsAndDeltaTest.php:8
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.

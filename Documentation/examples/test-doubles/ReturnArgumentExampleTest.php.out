@@ -1,0 +1,18 @@
+./tools/phpunit tests/ReturnArgumentExampleTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+E                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 error:
+
+1) ReturnArgumentExampleTest::testReturnArgumentStub
+PHPUnit\Framework\MockObject\Generator\ClassIsFinalException: Class "SomeClass" is declared "final" and cannot be doubled
+
+/path/to/tests/ReturnArgumentExampleTest.php:9
+
+ERRORS!
+Tests: 1, Assertions: 0, Errors: 1.

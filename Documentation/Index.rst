@@ -1,40 +1,40 @@
-..  include:: /Includes.rst.txt
+==============
+PHPUnit Manual
+==============
 
-.. _start:
+Edition for PHPUnit |version|. Updated on |today|.
 
-=======
-PHPUnit
-=======
+Sebastian Bergmann
 
-:Package name:
-    unit-guides
+This work is licensed under the Creative Commons Attribution 3.0 Unported License.
 
-:Version:
-    |release|
+Contents:
 
-:Language:
-    en
+.. toctree::
+   :maxdepth: 3
+   :numbered: 1
 
-:Author:
-    (todo)
+   installation
+   writing-tests-for-phpunit
+   textui
+   organizing-tests
+   fixtures
+   test-doubles
+   code-coverage
+   risky-tests
+   error-handling
+   extending-phpunit
 
-:License:
-    This document is published under the
-    `Creative Commons BY 4.0 <https://creativecommons.org/licenses/by/4.0/>`__
-    license.
+.. toctree::
+   :caption: Appendix
+   :maxdepth: 3
+   :numbered: 1
 
-:Rendered:
-    |today|
+   assertions
+   attributes
+   annotations
+   events
+   configuration
+   copyright
 
-----
-
-This is a stub for PHPUnit docs rendering.
-
-----
-
-**Table of Contents:**
-
-..  toctree::
-    :maxdepth: 2
-    :titlesonly:
 

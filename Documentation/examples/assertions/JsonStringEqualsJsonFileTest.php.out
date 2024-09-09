@@ -1,0 +1,26 @@
+./tools/phpunit tests/JsonStringEqualsJsonFileTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 failure:
+
+1) JsonStringEqualsJsonFileTest::testFailure
+Failed asserting that '{"mascot":"elephant"}' matches JSON string "{"mascot":"elePHPant"}
+".
+--- Expected
++++ Actual
+@@ @@
+ {
+-    "mascot": "elePHPant"
++    "mascot": "elephant"
+ }
+
+/path/to/tests/JsonStringEqualsJsonFileTest.php:8
+
+FAILURES!
+Tests: 1, Assertions: 5, Failures: 1.

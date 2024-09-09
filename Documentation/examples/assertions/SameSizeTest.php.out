@@ -1,0 +1,18 @@
+./tools/phpunit tests/SameSizeTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 failure:
+
+1) SameSizeTest::testFailure
+Failed asserting that actual size 1 matches expected size 2.
+
+/path/to/tests/SameSizeTest.php:8
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.

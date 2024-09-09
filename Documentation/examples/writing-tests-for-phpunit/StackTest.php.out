@@ -1,0 +1,10 @@
+./tools/phpunit tests/StackTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+...                                                                 3 / 3 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+OK (3 tests, 5 assertions)

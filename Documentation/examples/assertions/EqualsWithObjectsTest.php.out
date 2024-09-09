@@ -1,0 +1,27 @@
+./tools/phpunit tests/EqualsWithObjectsTest.php
+PHPUnit 11.3.3 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.3.11
+
+F                                                                   1 / 1 (100%)
+
+Time: 00:00, Memory: 23.02 MB
+
+There was 1 failure:
+
+1) EqualsWithObjectsTest::testFailure
+Failed asserting that two objects are equal.
+--- Expected
++++ Actual
+@@ @@
+ stdClass Object (
+-    'foo' => 'foo'
+-    'bar' => 'bar'
++    'foo' => 'bar'
++    'baz' => 'bar'
+ )
+
+/path/to/tests/EqualsWithObjectsTest.php:16
+
+FAILURES!
+Tests: 1, Assertions: 1, Failures: 1.

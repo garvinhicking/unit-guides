@@ -42,6 +42,7 @@ final class LiteralincludeDirective extends BaseDirective
         $extensionMap = [
             'html' => 'html',
             'php' => 'php',
+            'out' => 'plaintext',
             'typoscript' => 'typoscript',
             'tsconfig' => 'typoscript',
             'xml' => 'xml',
