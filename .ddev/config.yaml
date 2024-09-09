@@ -1,4 +1,4 @@
-name: render-guides
+name: phpunit-guides
 type: php
 docroot: Documentation-GENERATED-temp
 php_version: "8.1"
