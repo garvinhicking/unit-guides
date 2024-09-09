@@ -1,12 +1,12 @@
 {
-    "name": "garvininhicking/unit-guides-theme",
+    "name": "garvininhicking/phpunit-guides-theme",
     "description": "A theme for use in the phpdocumentor",
     "type": "library",
     "license": "MIT",
     "homepage": "https://phpunit.de",
     "autoload": {
         "psr-4": {
-            "PHPUnit\\PHPUnitTheme\\": "src/"
+            "T3Docs\\Typo3DocsTheme\\": "src/"
         }
     },
     "require": {

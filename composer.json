@@ -17,9 +17,10 @@
         "symfony/yaml": "^6.4",
         "t3docs/console-command": "^0.1.4",
         "t3docs/guides-php-domain": "^1.0",
-        "t3docs/typo3-guides-cli": "*",
-        "t3docs/typo3-guides-extension": "*",
-        "t3docs/typo3-version-handling": "*"
+        "t3docs/typo3-guides-cli": "^0.2.25",
+        "t3docs/typo3-guides-extension": "^0.12.5",
+        "t3docs/typo3-version-handling": "^0.2.25",
+        "garvinhicking/phpunit-docs-theme": "*"
     },
     "require-dev": {
         "ergebnis/composer-normalize": "^2.43",
