@@ -130,7 +130,7 @@ Running the test shown above yields the output shown below:
 It is useful to name each one with a string key.
 Output will be more verbose as it will contain that name of a dataset that breaks a test.
 
-.. _writing-tests-for-phpunit.data-providers.examples.NumericDataSetsTestUsingExternalDataProvider.php:
+.. _writing-tests-for-phpunit.data-providers.examples.NamedDataSetsTest.php:
 .. literalinclude:: examples/writing-tests-for-phpunit/NamedDataSetsTest.php
    :caption: Using a data provider with named data sets
    :name: writing-tests-for-phpunit.data-providers.examples.NamedDataSetsTest.php
