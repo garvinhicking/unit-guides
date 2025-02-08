@@ -70,9 +70,19 @@ code-style: ## Executes php-cs-fixer with "check" option
 	$(PHP_BIN) vendor/bin/php-cs-fixer check
 
 .PHONY: docs
-docs: ## Generate projects docs (from "Documentation" directory)
+docs: ## Generate projects docs (from "Documentation" directory) LOCALLY
 	@echo "$(ENV_INFO)"
 	$(PHP_BIN) vendor/bin/guides -vvv --no-progress --config=Documentation
+
+.PHONY: docker-docs
+docker-docs: ## Generate projects docs (from "Documentation" directory) WITHIN DOCKER
+	@echo "$(ENV_INFO)"
+	$(PHP_PROJECT_BIN) -vvv --no-progress --config=Documentation
+
+.PHONY: docker-enter
+docker-enter: ## Enter created docker container
+	@echo "$(ENV_INFO)"
+	docker run --rm -it --entrypoint sh -v ./:/project/ phpunit:local
 
 .PHONY: docker-build
 docker-build: ## Build docker image 'phpunit:local' for local debugging
@@ -116,9 +126,13 @@ cleanup: cleanup-tests cleanup-cache ## Runs all cleanup tasks
 .PHONY: static-code-analysis
 static-code-analysis: vendor phpstan ## Runs a static code analysis with phpstan (ensures composer)
 
+.PHONY: install
+install: vendor ## Runs composer installation
+
 ## LIST: Triggered targets that operate on specific file changes
 
-vendor: composer.json composer.lock
+vendor: composer.json
 	@echo "$(ENV_INFO)"
+	rm -f composer.lock
 	$(PHP_COMPOSER_BIN) composer validate --no-check-publish
-	$(PHP_COMPOSER_BIN) composer install --no-interaction --no-progress  --ignore-platform-reqs
+	$(PHP_COMPOSER_BIN) composer install --no-interaction --no-progress
