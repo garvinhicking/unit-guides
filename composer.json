@@ -7,8 +7,8 @@
         "ext-dom": "*",
         "ext-libxml": "*",
         "brotkrueml/twig-codehighlight": "^1.0",
-        "phpdocumentor/guides": "^1.6",
-        "phpdocumentor/guides-cli": "^1.5",
+        "phpdocumentor/guides": "1.6.5",
+        "phpdocumentor/guides-cli": "1.5.0",
         "phpdocumentor/guides-graphs": "^1.0",
         "phpdocumentor/guides-markdown": "^1.6",
         "phpdocumentor/guides-restructured-text": "^1.6",
@@ -24,7 +24,6 @@
         "t3docs/typo3-guides-cli": "^0.23.1",
         "t3docs/typo3-guides-extension": "^0.16.0",
         "t3docs/typo3-version-handling": "^0.23.1",
-        "league/flysystem": "^3.29.1",
         "garvinhicking/phpunit-docs-theme": "*"
     },
     "require-dev": {
