@@ -15,6 +15,7 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use T3Docs\Typo3DocsTheme\Nodes\Inline\CodeInlineNode;
 use T3Docs\Typo3DocsTheme\Nodes\Inline\ComposerInlineNode;
+use T3Docs\Typo3DocsTheme\Nodes\Inline\FileInlineNode;
 use T3Docs\Typo3DocsTheme\Nodes\YoutubeNode;
 use T3Docs\Typo3DocsTheme\Settings\Typo3DocsInputSettings;
 use T3Docs\Typo3DocsTheme\Settings\Typo3DocsThemeSettings;
@@ -65,6 +66,8 @@ class Typo3DocsThemeExtension extends Extension implements PrependExtensionInter
                         'project_issues' => $this->getConfigValue($configs, 'project_issues', ''),
                         'report_issue' => $this->getConfigValue($configs, 'report_issue', ''),
                         'typo3_core_preferred' => $this->getConfigValue($configs, 'typo3_core_preferred', ''),
+                        'confval_default' => $this->getConfigValue($configs, 'confval_default', 'Option'),
+                        'disable_version_switch' => $this->getConfigValue($configs, 'disable_version_switch', ''),
                     ],
                 ],
             );
@@ -102,6 +105,7 @@ class Typo3DocsThemeExtension extends Extension implements PrependExtensionInter
             'templates' => [
                 template(CodeInlineNode::class, 'inline/textroles/code.html.twig'),
                 template(ComposerInlineNode::class, 'inline/textroles/composer.html.twig'),
+                template(FileInlineNode::class, 'inline/textroles/file.html.twig'),
             ],
         ]);
     }

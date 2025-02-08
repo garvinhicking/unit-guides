@@ -9,7 +9,7 @@ code {
  */
 .code-block {
     margin-bottom: 0;
-    padding: .75rem;
+    padding: 0.75rem 2rem 0.75rem 0.75rem;
 
     & [data-line-number]::before {
         color: $gray-600;
@@ -53,11 +53,19 @@ code {
     position: relative;
 }
 
+.code-block-actions {
+    display: flex;
+    position: absolute;
+    right: 0.2em;
+    top: 0.1em;
+}
+
 .code-block-copy, a.code-block-edit {
     background: none;
     border: none;
     padding: .75rem;
-    text-decoration: none!important;
+    text-decoration: none !important;
+    height: min-content;
 
     .icon  {
         opacity: .5;

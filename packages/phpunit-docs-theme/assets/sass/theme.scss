@@ -4,10 +4,11 @@
 
 // Functions
 @import '../../node_modules/bootstrap/scss/functions';
-@import '../../node_modules/bootstrap/scss/bootstrap-reboot';
 
 // Variables
 @import 'variables';
+
+@import '../../node_modules/bootstrap/scss/bootstrap-reboot';
 
 // Dependencies
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/functions';
@@ -22,14 +23,17 @@
 
 // tweak bootstrap styles
 @import 'text';
+@import 'stretched-link';
 
 // components
 @import 'components/accordion';
 @import 'components/button';
 @import 'components/card';
 @import 'components/code';
+@import 'components/command';
 @import 'components/directoryTree';
 @import 'components/frame';
+@import 'components/glossary';
 @import 'components/images';
 @import 'components/math';
 @import 'components/menu';
@@ -40,7 +44,10 @@
 @import 'components/table';
 @import 'components/tabs';
 @import 'components/textroles';
+@import 'components/toggleSelection';
 @import 'components/uml';
+@import 'components/allDocumentationMenu';
+@import 'components/search';
 
 // Additional classes that can be applied by .. rst-class::
 @import 'components/customClasses/bignums';
@@ -48,6 +55,7 @@
 
 // Styles for special directives
 @import 'components/directives/admonition';
+@import 'components/directives/propertyCard';
 @import 'components/directives/confval.scss';
 @import 'components/directives/fieldlist';
 @import 'components/directives/phpdomain';

@@ -165,9 +165,15 @@ module.exports = function (grunt) {
     // watch
     watch: {
       /* Compile sass changes into theme directory */
+      js: {
+        files: [
+          '<%= paths.source %>js/**/*.js'
+        ],
+        tasks: ['uglify']
+      },
       sass: {
         files: [
-          '<%= paths.source %>sass/*.scss'
+          '<%= paths.source %>sass/**/*.scss'
         ],
         tasks: ['sass']
       }

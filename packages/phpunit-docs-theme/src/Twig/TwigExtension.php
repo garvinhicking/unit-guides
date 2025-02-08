@@ -12,7 +12,9 @@ use phpDocumentor\Guides\Nodes\LinkTargetNode;
 use phpDocumentor\Guides\Nodes\Metadata\NoSearchNode;
 use phpDocumentor\Guides\Nodes\Metadata\OrphanNode;
 use phpDocumentor\Guides\Nodes\Node;
+use phpDocumentor\Guides\Nodes\PrefixedLinkTargetNode;
 use phpDocumentor\Guides\Nodes\SectionNode;
+use phpDocumentor\Guides\ReferenceResolvers\AnchorNormalizer;
 use phpDocumentor\Guides\ReferenceResolvers\DocumentNameResolverInterface;
 use phpDocumentor\Guides\RenderContext;
 use phpDocumentor\Guides\Renderer\UrlGenerator\UrlGeneratorInterface;
@@ -21,14 +23,17 @@ use Psr\Log\LoggerInterface;
 use RuntimeException;
 use T3Docs\GuidesPhpDomain\Nodes\PhpComponentNode;
 use T3Docs\GuidesPhpDomain\Nodes\PhpMemberNode;
+use T3Docs\Typo3DocsTheme\Directives\SiteSetSettingsDirective;
 use T3Docs\Typo3DocsTheme\Inventory\Typo3VersionService;
 use T3Docs\Typo3DocsTheme\Nodes\Metadata\EditOnGitHubNode;
 use T3Docs\Typo3DocsTheme\Nodes\Metadata\TemplateNode;
 use T3Docs\Typo3DocsTheme\Nodes\PageLinkNode;
+use T3Docs\Typo3DocsTheme\Nodes\Typo3FileNode;
 use T3Docs\Typo3DocsTheme\Nodes\ViewHelperArgumentNode;
 use T3Docs\Typo3DocsTheme\Nodes\ViewHelperNode;
 use T3Docs\Typo3DocsTheme\Settings\Typo3DocsThemeSettings;
 use T3Docs\VersionHandling\DefaultInventories;
+use T3Docs\VersionHandling\Typo3VersionMapping;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -57,6 +62,7 @@ final class TwigExtension extends AbstractExtension
         private readonly Typo3DocsThemeSettings        $themeSettings,
         private readonly DocumentNameResolverInterface $documentNameResolver,
         private readonly Typo3VersionService           $typo3VersionService,
+        private readonly AnchorNormalizer              $anchorNormalizer,
     ) {
         if (strlen((string)getenv('GITHUB_ACTIONS')) > 0 && strlen((string)getenv('TYPO3AZUREEDGEURIVERSION')) > 0 && !isset($_ENV['CI_PHPUNIT'])) {
             // CI gets special treatment, then we use a fixed URI for assets.
@@ -66,7 +72,7 @@ final class TwigExtension extends AbstractExtension
             // executions, and sets links to resources/assets to a public CDN.
             // Outside CI (and for local development) all Assets are linked locally.
             // This is prevented when being run within PHPUnit.
-            $this->typo3AzureEdgeURI = 'https://typo3.azureedge.net/typo3documentation/theme/typo3-docs-theme/' . getenv('TYPO3AZUREEDGEURIVERSION') . '/';
+            $this->typo3AzureEdgeURI = 'https://cdn.typo3.com/typo3documentation/theme/typo3-docs-theme/' . getenv('TYPO3AZUREEDGEURIVERSION') . '/';
         }
     }
 
@@ -80,6 +86,7 @@ final class TwigExtension extends AbstractExtension
             new TwigFunction('getEditOnGitHubLinkFromPath', $this->getEditOnGitHubLinkFromPath(...), ['needs_context' => true]),
             new TwigFunction('getReportIssueLink', $this->getReportIssueLink(...), ['needs_context' => true]),
             new TwigFunction('getCurrentFilename', $this->getCurrentFilename(...), ['needs_context' => true]),
+            new TwigFunction('sourceFilename', $this->getSourceFilename(...), ['needs_context' => true]),
             new TwigFunction('getRelativePath', $this->getRelativePath(...), ['needs_context' => true]),
             new TwigFunction('getPagerLinks', $this->getPagerLinks(...), ['is_safe' => ['html'], 'needs_context' => true]),
             new TwigFunction('getPrevNextLinks', $this->getPrevNextLinks(...), ['is_safe' => ['html'], 'needs_context' => true]),
@@ -91,7 +98,32 @@ final class TwigExtension extends AbstractExtension
             new TwigFunction('getRstCodeForLink', $this->getRstCodeForLink(...), ['is_safe' => [], 'needs_context' => true]),
             new TwigFunction('isRenderedForDeployment', $this->isRenderedForDeployment(...)),
             new TwigFunction('replaceLineBreakOpportunityTags', $this->replaceLineBreakOpportunityTags(...), ['is_safe' => ['html'], 'needs_context' => false]),
+            new TwigFunction('filterAllowedSearchFacets', $this->filterAllowedSearchFacets(...), ['is_safe' => ['html'], 'needs_context' => false]),
         ];
+    }
+    public function filterAllowedSearchFacets(string $value): string
+    {
+        $allowed = [
+            'TypoScript',
+            'TSconfig',
+            'ViewHelper',
+            'TCA',
+            'TYPO3_CONF_VAR',
+            'YAML Form Setting',
+            'YAML RTE Setting',
+            'Site Language Configuration',
+            'Site Configuration',
+            'Console Command',
+            'Console Command Argument',
+            'Console Command Option',
+            'File',
+            'Directory',
+            SiteSetSettingsDirective::FACET,
+        ];
+        if (!in_array(trim($value), $allowed, true)) {
+            return 'Option';
+        }
+        return $value;
     }
     public function replaceLineBreakOpportunityTags(string $value): string
     {
@@ -173,27 +205,36 @@ final class TwigExtension extends AbstractExtension
     public function getRstCodeForLink(array $context, LinkTargetNode $linkTargetNode): string
     {
         $interlink = $this->themeSettings->getSettings('interlink_shortcode') !== '' ? $this->themeSettings->getSettings('interlink_shortcode') : 'somemanual';
-        if ($linkTargetNode->getLinkType() === ConfvalNode::LINK_TYPE) {
+        if ($linkTargetNode instanceof Typo3FileNode) {
             return sprintf(
-                ':confval:`%s <%s:%s>`',
+                ':file:`%s`',
+                $linkTargetNode->getLinkText(),
+            );
+        }
+        if ($linkTargetNode instanceof PrefixedLinkTargetNode && $linkTargetNode->getLinkType() === ConfvalNode::LINK_TYPE) {
+            return sprintf(
+                ':ref:`%s <%s:%s%s>`',
                 $linkTargetNode->getLinkText(),
                 $interlink,
+                $linkTargetNode->getPrefix(),
                 $linkTargetNode->getId()
             );
         }
-        if ($linkTargetNode->getLinkType() === ViewHelperNode::LINK_TYPE) {
+        if ($linkTargetNode instanceof PrefixedLinkTargetNode && $linkTargetNode->getLinkType() === ViewHelperNode::LINK_TYPE) {
             return sprintf(
-                ':typo3:viewhelper:`%s <%s:%s>`',
+                ':ref:`%s <%s:%s%s>`',
                 $linkTargetNode->getLinkText(),
                 $interlink,
+                $linkTargetNode->getPrefix(),
                 $linkTargetNode->getId()
             );
         }
-        if ($linkTargetNode->getLinkType() === ViewHelperArgumentNode::LINK_TYPE) {
+        if ($linkTargetNode instanceof PrefixedLinkTargetNode && $linkTargetNode->getLinkType() === ViewHelperArgumentNode::LINK_TYPE) {
             return sprintf(
-                ':typo3:viewhelper-argument:`%s <%s:%s>`',
+                ':ref:`%s <%s:%s%s>`',
                 $linkTargetNode->getLinkText(),
                 $interlink,
+                $linkTargetNode->getPrefix(),
                 $linkTargetNode->getId()
             );
         }
@@ -223,7 +264,7 @@ final class TwigExtension extends AbstractExtension
     {
         foreach ($sectionNode->getChildren() as $childNode) {
             if ($childNode instanceof AnchorNode) {
-                return $childNode->toString();
+                return $this->anchorNormalizer->reduceAnchor($childNode->toString());
             }
         }
         return '';
@@ -260,14 +301,14 @@ final class TwigExtension extends AbstractExtension
             return '';
         }
         $githubBranch = $this->themeSettings->getSettings('edit_on_github_branch', 'main');
-        $currentFileName = $this->getCurrentFilename($context);
-        if ($currentFileName === '') {
+        $sourceFile = $this->getSourceFilename($context);
+        if ($sourceFile === '') {
             return '';
         }
         $gitHubPerPageLink = $this->getEditOnGitHubLinkPerPage($renderContext);
 
         $githubDirectory = trim($this->themeSettings->getSettings('edit_on_github_directory', 'Documentation'), '/');
-        return $gitHubPerPageLink ?? sprintf("https://github.com/%s/edit/%s/%s/%s.rst", $githubButton, $githubBranch, $githubDirectory, $currentFileName);
+        return $gitHubPerPageLink ?? sprintf("https://github.com/%s/edit/%s/%s/%s", $githubButton, $githubBranch, $githubDirectory, $sourceFile);
     }
 
     private function getEditOnGitHubLinkPerPage(RenderContext $renderContext): string|null
@@ -314,8 +355,17 @@ final class TwigExtension extends AbstractExtension
         if (str_starts_with($reportButton, 'https://gitlab.com/')) {
             return $reportButton;
         }
+        if (str_starts_with($reportButton, 'https://bitbucket.org/')) {
+            $reportButton = $this->enrichBitbuckedReport($reportButton, $renderContext);
+            return $reportButton;
+        }
         if ($reportButton !== '') {
-            $this->logger->warning('For security reasons only only "report-issue" links in the guides.xml to a local page (starting with "/") or to one of these 3 plattforms are allowed: https://forge.typo3.org/ https://github.com/ https://gitlab.com/');
+            $this->logger->warning(
+                'For security reasons only "report-issue" links in the guides.xml
+                to a local page (starting with "/") or to one of these 4 platforms
+                are allowed: https://forge.typo3.org/ https://github.com/ https://gitlab.com/
+                https://bitbucket.org/'
+            );
             return '';
         }
 
@@ -344,16 +394,27 @@ final class TwigExtension extends AbstractExtension
         return '';
     }
 
-    /**
-     * @param string $reportButton
-     * @return string
-     */
     public function enrichGithubReport(string $reportButton, RenderContext $renderContext): string
     {
         if (str_ends_with($reportButton, '/issues')) {
             $reportButton .= '/new/choose';
         }
         if (str_ends_with($reportButton, '/new/choose') or str_ends_with($reportButton, '/new')) {
+            $reportButton .= '?title=';
+            $description = $this->getIssueTitle($renderContext);
+            $reportButton .= urlencode($description);
+        }
+        return $reportButton;
+    }
+
+
+
+    private function enrichBitbuckedReport(string $reportButton, RenderContext $renderContext): string
+    {
+        if (str_ends_with($reportButton, '/issues')) {
+            $reportButton .= '/new';
+        }
+        if (str_ends_with($reportButton, '/new')) {
             $reportButton .= '?title=';
             $description = $this->getIssueTitle($renderContext);
             $reportButton .= urlencode($description);
@@ -373,10 +434,34 @@ final class TwigExtension extends AbstractExtension
         }
         if (str_ends_with($reportButton, '/new')) {
             $reportButton .= '?issue[category_id]=1004&issue[subject]=';
-            $description = $this->getIssueTitle($renderContext);
-            $reportButton .= urlencode($description);
             $version = $this->typo3VersionService->getPreferredVersion();
-            $reportButton .= '&issue[custom_field_values][4]=' . $version;
+            $extension = $this->themeSettings->getSettings('interlink_shortcode');
+            if ($extension === 'changelog') {
+                $extension = 'typo3/cms-core';
+            }
+            $description = $this->getIssueTitle(
+                $renderContext,
+                sprintf(
+                    'https://docs.typo3.org/c/%s/%s/en-us',
+                    $extension,
+                    $version,
+                )
+            );
+            $reportButton .= urlencode($description);
+            switch ($version) {
+                case 'main':
+                    $reportButton .= '&issue[custom_field_values][4]=' . Typo3VersionMapping::getMajorVersionOfMain()->value;
+                    break;
+                case '13.4':
+                    $reportButton .= '&issue[custom_field_values][4]=13';
+                    break;
+                case '12.4':
+                    $reportButton .= '&issue[custom_field_values][4]=12';
+                    break;
+                case '11.5':
+                    $reportButton .= '&issue[custom_field_values][4]=11';
+                    break;
+            }
         }
         return $reportButton;
     }
@@ -385,9 +470,13 @@ final class TwigExtension extends AbstractExtension
      * @param RenderContext $renderContext
      * @return string
      */
-    public function getIssueTitle(RenderContext $renderContext): string
+    public function getIssueTitle(RenderContext $renderContext, ?string $docsPath = null): string
     {
-        return 'Problem on ' . $this->themeSettings->getSettings('project_home') . '/' . $renderContext->getCurrentFileName() . '.html';
+        return sprintf(
+            'Problem on %s/%s.html',
+            $docsPath ?? $this->themeSettings->getSettings('project_home'),
+            $renderContext->getCurrentFileName()
+        );
     }
 
     /**
@@ -413,6 +502,15 @@ final class TwigExtension extends AbstractExtension
         } catch (\Exception) {
             return '';
         }
+    }
+
+    /**
+     * @param array{env: RenderContext} $context
+     */
+    public function getSourceFilename(array $context): string
+    {
+        $renderContext = $this->getRenderContext($context);
+        return $renderContext->hasCurrentFileName() ? $renderContext->getDocument()->getOption('originalFileName', $renderContext->getCurrentFileName()) ?? '' : '';
     }
 
     /**
